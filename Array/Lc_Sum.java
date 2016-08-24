@@ -24,7 +24,7 @@ public class Lc_Sum{
 
 	//	LC167 Two Sum II - Input array is sorted;
 	public int[] twoSumSorted(int[] numbers, int target) {
-        	
+       	
 		int len = numbers.length;
 		if (len < 2) 
 			return null;
@@ -43,6 +43,53 @@ public class Lc_Sum{
 		
 		return null;
     	}
+
+	//	LC015 Three Sum;
+	public List<List<Integer>> threeSum(int[] nums) {
+       		
+		List<List<Integer>> res = new LinkedList<>();
+		int len = nums.length;
+		if (len < 3) 
+			return res;
+		
+		Arrays.sort(nums);
+		for (int i = 0; i < len - 2 && nums[i] <= 0; i++) {
+			int target = 0 - nums[i];
+			threeSumHelper(res, nums, target, i + 1, len - 1);
+			while(i < len - 1 && nums[i] == nums[i + 1])
+			    i++;
+		}
+				
+		return res;
+	}
+
+	public void threeSumHelper(List<List<Integer>> res, int[] nums, int target, int left, int right) {
+		while(left < right) {
+			if (nums[left] + nums[right] == target) {
+				List<Integer> tmp = new LinkedList<>();
+				tmp.add(-target);
+				tmp.add(nums[left]);
+				tmp.add(nums[right]);
+				res.add(tmp);		
+				
+				while(left < right && nums[left] == nums[left + 1])
+					left++;
+				while(left < right && nums[right] == nums[right - 1])
+					right--;
+				left++;
+				right--;
+			} else if (nums[left] + nums[right] < target) {
+				while(left < right && nums[left] == nums[left + 1])
+					left++;
+				left++;
+			} else {
+				while(left < right && nums[right] == nums[right - 1])
+					right--;
+				right--;
+			}
+		}
+		return;
+	}   
 
 	public static void main(String[] args) {
 		

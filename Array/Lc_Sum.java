@@ -93,36 +93,36 @@ public class Lc_Sum{
 
 	//	4Sum
 	public List<List<Integer>> fourSum(int[] nums, int target) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        Arrays.sort(nums);
-        for(int i = 0; i < nums.length - 3 && nums[i] <= target / 4; ++i){
-            for(int j = i + 1; j < nums.length - 2 && nums[i] + nums[j] <= target / 2; ++j){
-                int sum = nums[i] + nums[j];
-                int x = j + 1, y = nums.length - 1;
-                while(x  < y){
-                    if(sum + nums[x] + nums[y] == target){
-                        List<Integer> tmp = new ArrayList<Integer>();
-                        tmp.add(nums[i]);
-                        tmp.add(nums[j]);
-                        tmp.add(nums[x]);
-                        tmp.add(nums[y]);
-                        result.add(tmp);
-                        while(x < y && nums[x + 1] == nums[x])++x;
-                        ++x;
-                        while(y > x && nums[y - 1] == nums[y])--y;
-                        --y;
-                    }else if(sum + nums[x] + nums[y] < target){
-                        ++x;
-                    }else{
-                        --y;
-                    }
-                }
-            while(j < nums.length - 2 && nums[j + 1] == nums[j])++j;
-            }
-            while(i < nums.length - 3 && nums[i + 1] == nums[i])++i;
-        }
-        return result;
-    }
+	        List<List<Integer>> result = new ArrayList<List<Integer>>();
+	        Arrays.sort(nums);
+	        for(int i = 0; i < nums.length - 3 && nums[i] <= target / 4; ++i){
+	            for(int j = i + 1; j < nums.length - 2 && nums[i] + nums[j] <= target / 2; ++j){
+	                int sum = nums[i] + nums[j];
+	                int x = j + 1, y = nums.length - 1;
+	                while(x  < y){
+	                    if(sum + nums[x] + nums[y] == target){
+	                        List<Integer> tmp = new ArrayList<Integer>();
+	                        tmp.add(nums[i]);
+	                        tmp.add(nums[j]);
+	                        tmp.add(nums[x]);
+	                        tmp.add(nums[y]);
+	                        result.add(tmp);
+	                        while(x < y && nums[x + 1] == nums[x])++x;
+	                        ++x;
+	                        while(y > x && nums[y - 1] == nums[y])--y;
+	                        --y;
+	                    }else if(sum + nums[x] + nums[y] < target){
+	                        ++x;
+	                    }else{
+	                        --y;
+	                    }
+	                }
+	            while(j < nums.length - 2 && nums[j + 1] == nums[j])++j;
+	            }
+	            while(i < nums.length - 3 && nums[i + 1] == nums[i])++i;
+	        }
+	        return result;
+	}
 
 	public static void main(String[] args) {
 		

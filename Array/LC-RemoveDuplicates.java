@@ -2,6 +2,9 @@ public class Solution {
     
     /**
      * Remove Duplicates;
+     * 
+     * Leetcode 026
+     * 
      */
     public int removeDuplicates(int[] nums) {
         if (nums.length < 1)
@@ -24,6 +27,9 @@ public class Solution {
     
     /**
      * Duplicates are allowed at most twice;
+     * 
+     * Leetcode 080
+     * 
      */
     public int removeDuplicates(int[] nums) {
         if (nums.length < 1)

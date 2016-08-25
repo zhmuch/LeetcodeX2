@@ -39,4 +39,21 @@ public class Solution {
      * Leetcode 154;
      * 
      */
+    public int findMin(int[] nums) {
+        int len = nums.length;
+        int left = 0, right = len - 1;
+        
+        while(left < right) {
+            int med = left + (right - left) / 2;
+            
+            if (nums[med] < nums[right])
+                right = med;
+            else if (nums[med] > nums[right])
+                left = med + 1;
+            else
+                right--;
+        }
+        
+        return nums[right];
+    }
 }

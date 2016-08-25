@@ -1,4 +1,8 @@
 public class Solution {
+    
+    /**
+     * Without Duplicates
+     */
     public int search(int[] nums, int target) {
         int len = nums.length;
         if (len < 1)

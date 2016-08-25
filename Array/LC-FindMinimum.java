@@ -1,6 +1,11 @@
 public class Solution {
 
-    // Without Duplicates;
+    /**
+     * Without Duplicates;
+     * 
+     * Leetcode 153;
+     *
+     */
     public int findMin(int[] nums) {
         int len = nums.length;
         if (len < 1)
@@ -28,38 +33,10 @@ public class Solution {
     }
     
 
-    public int findMin(int[] nums) {
-        int len = nums.length;
-        if (len < 1)
-            return -1;
-        
-        if (nums[0] < nums[len - 1])
-            return nums[0];
-            
-        int left = 0, right = len - 1;
-        
-        while(nums[left] == nums[len - 1]) {
-            left++;
-            if (left >= len - 1)
-                return nums[len - 1];
-        }
-        
-        while(left <= right) {
-            System.out.println()
-            
-            int med = (left + right) / 2;
-            
-            if (med == left)
-                return Math.min(nums[left], nums[right]);
-            else if (nums[med - 1] > nums[med])
-                return nums[med];
-            else if (nums[med] > nums[left])
-                left = med + 1;
-            else
-                right = med - 1;
-        }
-        
-        return -1;
-        
-    }
+    /**
+     * With Duplicates;
+     * 
+     * Leetcode 154;
+     * 
+     */
 }

@@ -135,4 +135,25 @@ public class Solution {
         return maxP;
     }
     
+    /**
+     * LC309. Best Time to Buy and Sell Stock with Cooldown
+     *
+     */
+    public int maxProfit(int[] prices) {
+        int hold = Integer.MIN_VALUE, release = 0, cool = 0;
+        int tmpHold, tmpRelease, tmpCool;
+        
+        for(int i = 0; i < prices.length; i++) {
+            tmpHold = hold;
+            tmpRelease = release;
+            tmpCool = cool;
+            
+            hold = Math.max(tmpHold, cool - prices[i]);
+            release = Math.max(tmpRelease, tmpHold + prices[i]);
+            cool = Math.max(cool, tmpRelease);
+        }
+        
+        return Math.max(release, cool);
+    }
+    
 }

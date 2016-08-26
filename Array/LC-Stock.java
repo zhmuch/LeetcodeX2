@@ -71,9 +71,33 @@ public class Solution {
     /**
      * LC123. Best Time to Buy and Sell Stock III
      * 
-     * 
+     * 两遍扫描，左到右最大获利，右daozuo最大亏损；
      * 
      */
-    
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        if (len < 2)
+            return 0;
+            
+        int[] maxPro = new int[len];
+        int min = prices[0];
+        for(int i = 1; i < len; i++) {
+            min = Math.min(min, prices[i]);
+            maxPro[i] = Math.max(maxPro[i - 1], prices[i] - min);
+        }
+        
+        int[] maxCon = new int[len];
+        int max = prices[len - 1];
+        for(int i = len - 2; i >= 0; i--) {
+            max = Math.max(max, prices[i]);
+            maxCon[i] = Math.max(maxCon[i + 1], max - prices[i]);
+        }
+        
+        int maxProfit = 0;
+        for(int i = 0; i < len; i++)
+            maxProfit = Math.max(maxProfit, maxPro[i] + maxCon[i]);
+            
+        return maxProfit;
+    }
     
 }

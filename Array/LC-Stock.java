@@ -20,5 +20,22 @@ public class Solution {
         return max;
     }
     
+    /**
+     * LC122. Best Time to Buy and Sell Stock II
+     * Any transaction
+     * 
+     */
+    public int maxProfit(int[] prices) {
+        int max = 0, buyIn = Integer.MAX_VALUE;
+        
+        for(int i = 0; i < prices.length; i++) {
+            if (prices[i] > buyIn)
+                max += prices[i] - buyIn;
+            buyIn = prices[i];
+        }    
+    
+        return max;
+    }
+    
     
 }

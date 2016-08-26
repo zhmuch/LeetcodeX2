@@ -100,4 +100,39 @@ public class Solution {
         return maxProfit;
     }
     
+    /**
+     * LC188. Best Time to Buy and Sell Stock IV
+     * 
+     * Time Limit Exceed;
+     * 
+     */
+    public int maxProfit(int k, int[] prices) {
+        int len = prices.length;
+        if (len < 2)
+            return 0;
+            
+        int[] currProfit = new int[len];
+        int[] prevProfit = new int[len];
+        
+        int maxP = 0;
+        for( ; k > 0; k--) {
+            int tmpMax = - prices[0];
+            for(int i = 1; i < len; i++) {
+                currProfit[i] = Math.max(currProfit[i - 1], prices[i] + tmpMax);
+                tmpMax = Math.max(tmpMax, prevProfit[i] - prices[i]);
+                maxP = Math.max(currProfit[i], maxP);
+            }
+            
+            int[] tmp = prevProfit;
+            prevProfit = currProfit;
+            currProfit = tmp;
+            
+            // ! ! ! ! 可能正确 ! ! ! !
+            // if (prevProfit[len - 1] == currProfit[len - 1])
+            //     return prevProfit[len - 1];
+        }
+        
+        return maxP;
+    }
+    
 }

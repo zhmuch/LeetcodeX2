@@ -1,4 +1,11 @@
 public class Solution {
+    
+    /**
+     * LC39. Combination Sum
+     * 
+     * unlimited number of use
+     * 
+     */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new LinkedList<>();
         List<Integer> tmp = new LinkedList<>();

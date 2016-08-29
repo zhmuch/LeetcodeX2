@@ -1,5 +1,9 @@
 public class Solution {
+    
     /**
+     *LC55. Jump Game
+     * 
+     */
     public boolean canJump(int[] nums) {
         int max = 0;
         
@@ -11,4 +15,5 @@ public class Solution {
         
         return false;
     }
+    
 }

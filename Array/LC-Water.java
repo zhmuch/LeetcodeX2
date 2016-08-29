@@ -23,6 +23,30 @@ public class Solution {
     /**
      * LC-042. Trapping Rain Water
      * 
+     * One pointer, scan from left to right;
+     * 
      */
-    
+    public int trap(int[] height) {
+        int vol = 0;
+        int maxIdx = 0;
+        
+        for (int i = 1; i < height.length; i++) {
+            if (height[i] < height[maxIdx]) {
+                int j = i - 1;
+                while(height[i] > height[j]) {
+                    vol += height[i] - height[j];
+                    height[j] = height[i];
+                    j--;
+                }
+            } else {
+                for (int j = maxIdx + 1; j < i; j++) {
+                    vol += height[maxIdx] - height[j];
+                    height[j] = height[maxIdx];
+                }
+                maxIdx = i;    
+            }
+        }
+        
+        return vol;
+    }
 }

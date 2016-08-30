@@ -58,4 +58,23 @@ public class Solution {
         
         return idx + 1;
     }
+    
+    /**
+     * LC027. Remove Element
+     * 
+     */
+    public int removeElement(int[] nums, int val) {
+        int idx = 0, len = nums.length;
+        
+        while (idx < len) {
+            if (nums[idx] == val) {
+                len--;
+                nums[idx] = nums[len];
+            } else {
+                idx++;
+            }
+        }
+        
+        return len;
+    }
 }

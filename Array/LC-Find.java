@@ -18,4 +18,20 @@ public class Solution {
         
         return nums.length + 1;
     }
+    
+    /**
+     * LC162. Find Peak Element
+     * 
+     * O(N)
+     * 
+     */
+    public int findPeakElement(int[] nums) {
+        int maxIdx = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[maxIdx])
+                maxIdx = i;
+        }
+        
+        return maxIdx;
+    }
 }

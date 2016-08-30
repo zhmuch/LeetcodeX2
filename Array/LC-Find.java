@@ -1,4 +1,8 @@
 public class Solution {
+    /**
+     * LC041. First Missing Positive
+     * 
+     */
     public int firstMissingPositive(int[] nums) {
         for (int i = 0; i < nums.length; i++) 
             while (nums[i] > 0 && nums[i] <= nums.length && nums[i] != nums[nums[i] - 1]) {

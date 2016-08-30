@@ -34,4 +34,24 @@ public class Solution {
         
         return maxIdx;
     }
+    
+    /**
+     * LC162. Find Peak Element
+     * 
+     * O(logN)
+     * 
+     */
+    public int findPeakElement(int[] nums) {
+        return findPeakElement(nums, 0, nums.length - 1);
+    }
+    
+    public int findPeakElement(int[] nums, int left, int right) {
+        if (left == right)
+            return left;
+            
+        int l = findPeakElement(nums, left, (left + right) / 2);
+        int r = findPeakElement(nums, (left + right) / 2 + 1, right);
+        
+        return (nums[l] > nums[r]) ? l : r;
+    }
 }

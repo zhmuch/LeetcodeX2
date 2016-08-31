@@ -112,35 +112,35 @@ public class Solution {
     
     
     /**
-     * 
+     * LC059. Spiral Matrix II
      * 
      */
-    public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> result = new LinkedList<Integer>();
+    public int[][] generateMatrix(int n) {
+        if (n<1) {
+            int[][] result = new int[0][0];
+            return result;
+        }
 
-        int row = matrix.length;
-        if (row < 1) return result;
-        int col = matrix[0].length;
-        if (col < 1) return result;
+        int[][] result = new int[n][n];
 
-        boolean[][] flag = new boolean[row][col];
-        for (int i=0; i<row; i++){
-            for (int j=0; j<col; j++){
+        boolean[][] flag = new boolean[n][n];
+        for (int i=0; i<n; i++){
+            for (int j=0; j<n; j++){
                 flag[i][j] = true;
             }
         }
 
         int i = 0;
         int j = 0;
-        int count = 0;
+        int count = 1;
         int direction = 0;
 
-        while (count < row * col){
+        while (count <= n * n){
             switch (direction)
             {
                 case 0: {
-                    while(j<col && flag[i][j]){
-                        result.add(matrix[i][j]);
+                    while(j<n && flag[i][j]){
+                        result[i][j] = count;
                         count++;
                         flag[i][j]=false;
                         j++;
@@ -151,8 +151,8 @@ public class Solution {
                     break;
                 }
                 case 1: {
-                    while(i<row && flag[i][j]){
-                        result.add(matrix[i][j]);
+                    while(i<n && flag[i][j]){
+                        result[i][j] = count;
                         count++;
                         flag[i][j]=false;
                         i++;
@@ -164,7 +164,7 @@ public class Solution {
                 }
                 case 2: {
                     while(j>=0 && flag[i][j]){
-                        result.add(matrix[i][j]);
+                        result[i][j] = count;
                         count++;
                         flag[i][j]=false;
                         j--;
@@ -176,7 +176,7 @@ public class Solution {
                 }
                 case 3: {
                     while(i>=0 && flag[i][j]){
-                        result.add(matrix[i][j]);
+                        result[i][j] = count;
                         count++;
                         flag[i][j]=false;
                         i--;

@@ -1,6 +1,8 @@
 public class Solution {
     /**
-     *
+     * LC034. Search for a Range
+     * 
+     */
     public int[] searchRange(int[] nums, int target) {
         int[] res = {-1, -1};
         int idx = -1;

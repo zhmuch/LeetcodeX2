@@ -1,5 +1,9 @@
 public class Solution {
-
+    
+    /**
+     * LC056. Merge Intervals
+     * 
+     */
     public List<Interval> merge(List<Interval> intervals) {
         List<Interval> res = new LinkedList<>();
         

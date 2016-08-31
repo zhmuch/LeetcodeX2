@@ -67,8 +67,8 @@ public class Solution {
             fast = nums[nums[fast]];
         }
 
-        int find=0;
-        while(find!=slow){
+        int find = 0;
+        while(find != slow){
             slow = nums[slow];
             find = nums[find];
         }

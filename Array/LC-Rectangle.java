@@ -1,4 +1,56 @@
+/**********
+ * 
+ * 84. Largest Rectangle in Histogram
+ * 
+ **********/
+
+
 /**
+ * Two Pointer
+ * 
+ * Super fast;
+ * 
+ */
+   public int largestRectangleArea(int[] heights) {
+        int ans = 0;
+        int n = heights.length;
+        int left[] = new int[n+1];
+        int right[] = new int[n+1];
+        processLR(heights, left, right);
+        for(int i=1; i<=n; i++){
+            int tmp = (right[i]-left[i]+1) * heights[i-1];
+            if( ans < tmp)
+                ans = tmp;
+        }
+        return ans;
+    }
+
+    public static void processLR(int heights[], int left[], int right[]){
+        int n = heights.length;
+        //用临时数组，设置两个哨兵
+        int tempArr[] = new int[n+2];
+        tempArr[0] = -1;
+        for(int i=1; i<=n; i++) tempArr[i] = heights[i-1];
+        tempArr[tempArr.length-1] = -1;
+
+        for(int i=1; i<=n; i++){
+            int k = i;
+            while( tempArr[i] <= tempArr[k-1])
+                k = left[k-1];
+            left[i] = k;
+        }
+
+        for(int i=n; i>0; i--){
+            int k = i;
+            while(  tempArr[i] <= tempArr[k+1])
+                 k = right[k+1];
+            right[i] = k;
+        }
+    }
+
+
+/**
+ * Stack
  * 
  * AC Code;
  * 
@@ -31,13 +83,13 @@ public class Solution {
 }
 
 
-
-
-import java.util.*;
-
-public class Lc84 {
-	
-	public static int maxRec(int[] heights){
+/**
+ * Stack
+ * 
+ * Time Limit Exceed;
+ * 
+ */ 
+ 	public static int maxRec(int[] heights){
 		
 		int len = heights.length;
 		if(len < 1)
@@ -67,8 +119,11 @@ public class Lc84 {
 		
 	}
 
-	public static void main(String[] args){
-		int[] heights = {2, 1, 5, 6, 2, 3};
-		System.out.println(maxRec(heights));	
-	}
-}
+
+
+
+/**********
+ * 
+ * 85. Maximal Rectangle
+ * 
+ **********/

@@ -1,4 +1,9 @@
 public class Solution {
+    
+    /**
+     * LC064. Minimum Path Sum
+     * 
+     */
     public int minPathSum(int[][] grid) {
         int row = grid.length, col = grid[0].length;
         int[] prev = new int[col], curr = new int[col];

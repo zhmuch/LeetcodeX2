@@ -54,4 +54,24 @@ public class Solution {
         
         return (nums[l] > nums[r]) ? l : r;
     }
+    
+    /**
+     * LC287. Find the Duplicate Number
+     * 
+     */
+    public int findDuplicate(int[] nums) {
+        int slow = nums[0];
+        int fast = nums[nums[0]];
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+
+        int find=0;
+        while(find!=slow){
+            slow = nums[slow];
+            find = nums[find];
+        }
+        return find;
+    }
 }

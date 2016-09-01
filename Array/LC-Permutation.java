@@ -33,7 +33,7 @@ public class Solution {
     
     /**
      * LC046. Permutations
-     * ! ! ! ! ! ! 错误方法 ！ ！！！！！！！！！
+     * 
      * 
      */
     public List<List<Integer>> permute(int[] nums) {
@@ -65,6 +65,8 @@ public class Solution {
     
     /**
      * LC047. Permutations II
+     * 
+     * ! ! ! ! ! ! 错误方法 ！ ！！！！！！！！！
      * 
      */
     public List<List<Integer>> permuteUnique(int[] nums) {

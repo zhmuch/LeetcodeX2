@@ -1,4 +1,9 @@
 public class Solution {
+    
+    /**
+     * LC031. Next Permutation
+     * 
+     */
     public void nextPermutation(int[] nums) {
         int len = nums.length;
         if (len < 2)

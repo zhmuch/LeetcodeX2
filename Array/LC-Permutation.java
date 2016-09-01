@@ -62,6 +62,40 @@ public class Solution {
     }
     
     
+    /**
+     * LC047. Permutations II
+     * 
+     */
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new LinkedList<>();
+        List<Integer> tmp = new LinkedList<>();
+        
+        dfs(res, tmp, nums, 0);
+        
+        return res;
+    }
+    
+    private void dfs(List<List<Integer>> res, List<Integer> tmp, int[] nums, int idx) {
+        if (idx >= nums.length) {
+            res.add(new LinkedList<>(tmp));
+            return;
+        }
+        
+        for (int ex = idx; ex < nums.length; ex++) {
+            swap(nums, idx, ex);
+            tmp.add(nums[idx]);
+            
+            dfs(res, tmp, nums, idx + 1);
+            
+            swap(nums, idx, ex);
+            tmp.remove(tmp.size() - 1);
+            
+            while (ex < nums.length - 1 && nums[ex] == nums[ex + 1])
+                ex++;
+        }
+    }
+    
     private void swap(int[] nums, int a, int b) {
         int tmp = nums[a];
         nums[a] = nums[b];

@@ -30,6 +30,38 @@ public class Solution {
         }
     }
     
+    
+    /**
+     * LC046. Permutations
+     * 
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new LinkedList<>();
+        List<Integer> tmp = new LinkedList<>();
+        
+        dfs(res, tmp, nums, 0);
+        
+        return res;
+    }
+    
+    private void dfs(List<List<Integer>> res, List<Integer> tmp, int[] nums, int idx) {
+        if (idx >= nums.length) {
+            res.add(new LinkedList<>(tmp));
+            return;
+        }
+        
+        for (int i = idx; i < nums.length; i++) {
+            swap(nums, idx, i);
+            tmp.add(nums[idx]);
+            
+            dfs(res, tmp, nums, idx + 1);
+            
+            swap(nums, idx, i);
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+    
+    
     private void swap(int[] nums, int a, int b) {
         int tmp = nums[a];
         nums[a] = nums[b];

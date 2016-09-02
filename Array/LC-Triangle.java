@@ -74,4 +74,35 @@ public class Solution {
         
         return curr;
     }
+    
+    
+    /**
+     * LC120. Triangle
+     * 
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int row = triangle.size();
+        int[] prev = new int[row], curr = new int[row];
+        curr[0] = triangle.get(0).get(0);
+        
+        for (int i = 1; i < row; i++) {
+            int[] tmp = curr;
+            curr = prev;
+            prev = tmp;
+            
+            List<Integer> currRow = triangle.get(i);
+            
+            curr[0] = prev[0] + currRow.get(0);
+            curr[i] = prev[i - 1] + currRow.get(i);
+            for (int j = 1; j < i; j++) {
+                curr[j] = currRow.get(j) + Math.min(prev[j - 1], prev[j]);
+            }
+        }
+        
+        int min = Integer.MAX_VALUE;
+        for (int j = 0; j < row; j++)
+            min = Math.min(min, curr[j]);
+        
+        return min;
+    }
 }

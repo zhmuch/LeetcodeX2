@@ -42,4 +42,34 @@ public class Solution {
                 set.add(i);
         return false;
     }
+    
+    
+    /**
+     * 219. Contains Duplicate II
+     * 
+     * 滑动窗口
+     */
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashSet<Integer> set = new HashSet<>();
+        
+        for (int i = 0; i <= k && i < nums.length; i++) {
+            if (set.contains(nums[i]))
+                return true;
+            else
+                set.add(nums[i]);
+        }
+        
+        if (k >= nums.length - 1)
+            return false;
+        
+        for (int j = k + 1; j < nums.length; j++) {
+            set.remove(nums[j - k - 1]);
+            if (set.contains(nums[j]))
+                return true;
+            else
+                set.add(nums[j]);
+        }
+        
+        return false;
+    }
 }

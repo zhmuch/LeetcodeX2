@@ -1,4 +1,8 @@
 public class Solution {
+    /**
+     * 169. Majority Element
+     * 
+     */
     public int majorityElement(int[] nums) {
         int curr = -1, count = 0;
         

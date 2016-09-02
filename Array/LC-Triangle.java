@@ -45,5 +45,33 @@ public class Solution {
      * 119. Pascal's Triangle II
      * 
      */
-    
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> curr = new LinkedList<>(), prev = new LinkedList<>();
+        if (rowIndex < 0)
+            return curr;
+        
+        curr.add(1);
+        if (rowIndex == 0)
+            return curr;
+            
+        curr.add(1);
+        if (rowIndex == 1)
+            return curr;
+        
+        List<Integer> tmp;
+        
+        for (int i = 1; i < rowIndex; i++) {   
+            tmp = curr;
+            curr = prev;
+            prev = tmp;
+            curr.clear();
+            
+            curr.add(1);
+            for (int j = 0; j < prev.size() - 1; j++)
+                curr.add(prev.get(j) + prev.get(j + 1));
+            curr.add(1);
+        }
+        
+        return curr;
+    }
 }

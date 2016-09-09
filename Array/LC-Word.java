@@ -83,4 +83,69 @@ public class Solution {
     	board[y][x] ^= 256;
     	return exist;
     }
+    
+    
+    
+    /**
+     * 127. Word Ladder
+     * 
+     * Time Limit Exceed;
+     * 
+     */
+    public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+        int dist = 1, len = beginWord.length();
+
+        if (beginWord.equals(endWord))
+            return dist;
+
+        Set<String> used = new HashSet<>();
+        Set<String> left = new HashSet<>(wordList);
+        Set<String> curr = new HashSet<>();
+        Set<String> prev;
+
+        used.add(beginWord);
+        curr.add(beginWord);
+
+        while(true) {
+            prev = curr;
+            curr = new HashSet<>();
+
+            for (String s : prev) {
+                StringBuilder tmp = new StringBuilder(s);
+                for (int i = 0; i < len; i++) {
+                    char c = tmp.charAt(i);
+                    tmp.deleteCharAt(i);
+
+                    for (int j = 0; j < 26; j++) {
+                        char replace = (char)('a' + j);
+                        tmp.insert(i, replace);
+
+                        String newAdd = tmp.toString();
+
+                        if (endWord.equals(newAdd)) {
+                            dist++;
+                            return dist;
+                        }
+
+                        if (left.contains(newAdd)){
+
+                            used.add(newAdd);
+                            left.remove(newAdd);
+                            curr.add(newAdd);
+                        }
+
+                        tmp.deleteCharAt(i);
+                    }
+
+                    tmp.insert(i, c);
+                }
+            }
+
+            dist++;
+
+            if (curr.isEmpty()) {
+                return 0;
+            }
+        }
+    }
 }

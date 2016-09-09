@@ -257,4 +257,28 @@ public class Solution {
           sol.remove(sol.size() - 1);
         }
       }
+      
+    /**
+     * 139. Word Break
+     * 
+     * DP, little pruning;
+     * 
+     */
+    public boolean wordBreak(String s, Set<String> wordDict) {
+        int len = s.length();
+        boolean[] mat = new boolean[len + 1];
+        mat[0] = true;
+        
+        for (int i = 1; i <= len; i++) {
+            for (int j = 0; j < i; j++) {
+                String tmp = s.substring(j, i);
+                if (wordDict.contains(tmp) && mat[j]) {
+                    mat[i] = true;
+                    break;
+                }
+            }
+        }
+        
+        return mat[len];
+    }
 }

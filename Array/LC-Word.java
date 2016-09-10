@@ -283,4 +283,62 @@ public class Solution {
         
         return mat[len];
     }
+    
+    
+  /**
+   * 140. Word Break II
+   * 
+   * AC, 27ms
+   * 
+   */
+  public List<String> wordBreak(String s, Set<String> wordDict) {
+        int len = s.length();
+        Hashtable<Integer, List<Integer>> father = new Hashtable<>();
+        father.put(0, new LinkedList<>());
+        
+        for (int i = 1; i <= len; i++) {
+            for (int j = 0; j < i; j++) {
+                if (father.containsKey(j)) {
+                    String tmp = s.substring(j, i);
+                    if (wordDict.contains(tmp)) {
+                        if (father.containsKey(i)) {
+                            father.get(i).add(j);
+                        } else {
+                            father.put(i, new LinkedList<Integer>(Arrays.asList(j)));
+                        }
+                    }
+                }
+            }
+        }
+        
+        List<String> res = new LinkedList<>();
+        if (!father.containsKey(len))
+            return res;
+        
+        dfs(res, father, s, new StringBuilder(), len);
+        
+        return res;
+    }
+    
+    private void dfs(List<String> res, Hashtable<Integer, List<Integer>> father, String s, StringBuilder sb, int idx) {
+        if (idx == 0) {
+            res.add(sb.toString());
+        }
+        
+        for (int i : father.get(idx)) {
+            StringBuilder newSb = new StringBuilder(sb);
+            
+            if (newSb.length() > 0) {
+                newSb.insert(0, ' ');
+            }
+            
+            for (int j = idx - 1; j >= i; j--) {
+                newSb.insert(0, s.charAt(j));
+            }
+            
+            dfs(res, father, s, newSb, i);
+        }
+        
+        return;
+    }
 }

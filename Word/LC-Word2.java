@@ -56,4 +56,34 @@ public class Solution {
             sb.deleteCharAt(0);
         return sb.toString();
     }
+    
+    
+    /**
+     * LC290. Word Pattern
+     * 
+     * 
+     */
+    public boolean wordPattern(String pattern, String str) {
+        String[] words = str.split(" ");
+        
+        if (pattern.length() != words.length)
+            return false;
+            
+        
+        Hashtable<Character, String> table = new Hashtable<>();
+        int stringCount = 0;
+        
+        for (int i = 0; i < words.length; i++) {
+            if (table.containsKey(pattern.charAt(i))) {
+                if (!table.get(pattern.charAt(i)).equals(words[i]))
+                    return false;
+            } else {
+                if (!table.contains(words[i]))
+                    stringCount++;
+                table.put(pattern.charAt(i), words[i]);
+            }
+        }
+        
+        return stringCount == table.size();
+    }
 }

@@ -85,6 +85,155 @@ public class Solution {
     }
     
     
+  /**
+   * LC-212. Word Search II
+   * 
+   * Trie
+   * 
+   */
+  import java.util.*;
+
+  public class Solution {
+    List<String> res;
+    int[][] directions = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+    boolean[][] isUsed;
+    char[][] board;
+    Trie dict;
+    int row, col;
+
+    public List<String> findWords(char[][] board, String[] words) {
+
+        res = new LinkedList<>();
+        if(board == null)
+            return res;
+        row = board.length;
+        if(row < 1)
+            return res;
+        col = board[0].length;
+        if(col < 1)
+            return res;
+
+        this.board = board;
+        isUsed = new boolean[row][col];
+
+        dict = new Trie();
+        for(String s : words)
+            dict.insert(s);
+
+        //  Special Case;
+        if(dict.root.isWord)
+            res.add("");
+
+        for(int i = 0; i < row; i++)
+            for(int j = 0; j < col; j++){
+                TrieNode node = dict.root;
+                if(node.links[board[i][j] - 'a'] != null){
+                    StringBuilder s = new StringBuilder();
+                    s.append(board[i][j]);
+                    node = node.links[board[i][j] - 'a'];
+                    isUsed[i][j] = true;
+
+                    dfs(node, s, i, j);
+                    
+                    isUsed[i][j] = false;
+                }
+            }
+
+        return res;
+    }
+
+    private void dfs(TrieNode node, StringBuilder curr, int row, int col) {
+        String tmp = curr.toString();
+
+        if(node.isWord){
+            node.isWord = false;
+            dict.reform(node);
+            res.add(tmp);
+        }
+
+        for(int i = 0; i < 4; i++) {
+                int nextRow = row + directions[i][0];
+                int nextCol = col + directions[i][1];
+
+                if(nextRow >= 0 && nextRow < this.row && nextCol >= 0 && nextCol < this.col && !isUsed[nextRow][nextCol]){
+                    char c = board[nextRow][nextCol];
+                    if(node.links[c - 'a'] != null){
+                        curr.append(c);
+                        isUsed[nextRow][nextCol] = true;
+                        dfs(node.links[c - 'a'], curr, nextRow, nextCol);
+                        curr.deleteCharAt(curr.length() - 1);
+                        isUsed[nextRow][nextCol] = false;
+                    }
+                }
+            }
+    }
+
+    class TrieNode {
+        // Initialize your data structure here.
+        char c;
+        boolean isWord;
+        TrieNode pap;
+
+        TrieNode[] links = new TrieNode[26];
+        int count = 0;
+
+        public TrieNode() {}
+
+        public TrieNode(char c){
+            this.c = c;
+        }
+    }
+
+    public class Trie {
+        public TrieNode root;
+
+        public Trie() {
+            root = new TrieNode();
+        }
+
+        // Inserts a word into the trie.
+        public void insert(String word) {
+            if(word == null || word.length() < 1){
+                root.isWord = true;
+                return;
+            }
+
+            TrieNode curr = root;
+            int idx = 0;
+
+            while(idx < word.length()){
+                char c = word.charAt(idx);
+                if(curr.links[c - 'a'] != null)
+                    curr = curr.links[c - 'a'];
+                else {
+                    TrieNode tmp = new TrieNode(c);
+                    tmp.pap = curr;
+                    curr.count++;
+                    curr.links[c - 'a'] = tmp;
+                    curr = tmp;
+                }
+                idx++;
+            }
+            curr.isWord = true;
+        }
+        
+        public void reform(TrieNode curr) {
+            if(curr.isWord || curr.count > 0 || curr == root)
+                return;
+            else{
+                TrieNode prev = curr.pap;
+
+                prev.count--;
+                prev.links[curr.c - 'a'] = null;
+                curr.pap = null;
+
+                reform(prev);
+            }
+        }
+    }
+}
+    
+    
     
     /**
      * 127. Word Ladder

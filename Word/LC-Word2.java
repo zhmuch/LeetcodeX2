@@ -86,4 +86,43 @@ public class Solution {
         
         return stringCount == table.size();
     }
+    
+    
+    /**
+     * LC318. Maximum Product of Word Lengths
+     * 
+     * 
+     */
+    public int maxProduct(String[] words) {
+        int[] map = new int[words.length];
+
+        Arrays.sort(words, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o2.length() - o1.length();
+            }
+        });
+
+        for (int i = 0; i < words.length; i++) {
+            int bits = 0;
+            for (int j = 0; j < words[i].length(); j++) {
+                bits = bits | (1 << words[i].charAt(j));
+            }
+            map[i] = bits;
+        }
+
+        int max = 0;
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].length() * words[i].length() <= max)
+                break;
+            for (int j = i + 1; j < words.length; j++) {
+                if ((map[i] & map[j]) == 0) {
+                    max = Math.max(max, words[i].length() * words[j].length());
+                    break;
+                }
+            }
+        }
+
+        return max;
+    }
 }

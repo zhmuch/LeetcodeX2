@@ -158,4 +158,94 @@ public class Solution {
         }
         return res;
     }
+    
+    
+    /**
+     * LC076. Minimum Window Substring
+     * 
+     * 80ms;
+     * 
+     */
+    public String minWindow(String s, String t) {
+        int l = 0, r = -1, len = Integer.MAX_VALUE;
+
+        if (s.length() < t.length())
+            return "";
+
+        //  Special case: t has only one character;
+        if (t.length() == 1) {
+            for (int i = 0; i < s.length(); i++)
+                if (s.charAt(i) == t.charAt(0))
+                    return new String(t);
+            return "";
+        }
+
+        //  Construct dictionary for t;
+        int[] charDict = new int[128];
+        int unmatched = 0;
+        for (int i = 0; i < t.length(); i++) {
+            int p = (int) t.charAt(i);
+            if (charDict[p] == 0)
+                unmatched++;
+            charDict[p]++;
+        }
+
+
+        int[] curr = new int[128];
+        int left = 0, right = -1;
+
+        while (true) {
+
+            while (unmatched > 0 && right < s.length() - 1) {
+                right++;
+                int p = (int) s.charAt(right);
+
+                if (charDict[p] > 0) {
+                    curr[p]++;
+                    if (charDict[p] == curr[p])
+                        unmatched--;
+                }
+            }
+
+//            System.out.println("Unmatched: " + unmatched + "  left: " + left + "  right: " + right);
+
+            while (unmatched == 0 && left < right) {
+                int p = (int) s.charAt(left);
+                left++;
+
+                if (charDict[p] > 0) {
+                    if (charDict[p] == curr[p]) {
+                        unmatched++;
+
+                        //  All matched decide if minimum;
+                        left--;
+                        if (right - left < len) {
+                            l = left;
+                            r = right;
+                            len = right - left;
+                        }
+                        left++;
+                    }
+                    curr[p]--;
+                }
+            }
+
+            while (unmatched == 1 && left < right) {
+                int p = (int) s.charAt(left);
+
+                if (charDict[p] > 0) {
+                    if (charDict[p] >= curr[p])
+                        break;
+                    curr[p]--;
+                }
+
+                left++;
+            }
+
+            if (left > right || right >= s.length() - 1)
+                break;
+        }
+
+        return s.substring(l, r + 1);
+    }
 }

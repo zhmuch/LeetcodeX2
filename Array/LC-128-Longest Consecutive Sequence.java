@@ -1,5 +1,9 @@
 public class Solution {
-  /**
+    /**
+     * Sort
+     * 
+     * O(nlogn)
+     */
     public int longestConsecutive(int[] nums) {
         Arrays.sort(nums);
         

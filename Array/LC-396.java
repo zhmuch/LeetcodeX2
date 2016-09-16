@@ -1,4 +1,8 @@
 public class Solution {
+    /**
+     * Time Limit Exceed;
+     * 
+     */
     public int maxRotateFunction(int[] A) {
         if (A == null || A.length < 1)
             return 0;

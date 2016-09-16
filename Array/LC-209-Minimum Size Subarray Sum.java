@@ -1,4 +1,10 @@
 public class Solution {
+    /**
+     * Two Pointer;
+     * 
+     * O(n)
+     * 
+     */
     public int minSubArrayLen(int s, int[] nums) {
         if (nums == null || nums.length < 1)
             return 0;

@@ -15,16 +15,11 @@ public class NumArray {
         arr = new int[len];
         System.arraycopy(nums, 0, arr, 0, len);
 
-//        System.out.println("size: " + size);
-
         constrST(0, len - 1, 0);
     }
 
     private int constrST(int ss, int se, int si) {
-//        System.out.println("si: " + si + "  ss: " + ss + "  se: " + se);
-
         if (ss == se) {
-//            System.out.println("si: " + si);
             st[si] = arr[ss];
             return st[si];
         }

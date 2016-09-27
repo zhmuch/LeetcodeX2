@@ -44,7 +44,7 @@ public class Solution {
     
     
     /**
-     * Poor Performance;
+     * DP + Backtrack;
      *
      */
     public List<List<String>> partition(String s) {
@@ -58,14 +58,6 @@ public class Solution {
             for (int i = 0; i + j < len; i++) {
                 mat[i][i + j] = (j == 1) ? (s.charAt(i) == s.charAt(i + j)) : (mat[i + 1][i + j - 1] && s.charAt(i) == s.charAt(i + j));
             }
-        }
-        
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                System.out.print(mat[i][j] + " ");
-            }
-            
-            System.out.println();
         }
         
         List<List<String>> res = new LinkedList<>();

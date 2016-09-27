@@ -3,8 +3,8 @@ public class Solution {
      * Much Faster;
      *
      */
-    public class Solution {
-        List<List<String>> resultLst;
+    	public class Solution {
+            List<List<String>> resultLst;
 	    ArrayList<String> currLst;
         
 	    public List<List<String>> partition(String s) {
@@ -40,7 +40,7 @@ public class Solution {
 	        }
 	        return true;
 	    }
-    }
+    	}
     
     
     /**

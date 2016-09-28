@@ -1,4 +1,51 @@
 public class Solution {
+    
+    /**
+     * KMP
+     */
+    public String shortestPalindrome(String s) {
+        if (s.length() < 2)
+            return s;
+        
+        char[] str = s.toCharArray();
+        int[] helper = new int[str.length + 1];
+
+        prefixComp(helper, str);
+
+        int matched = 0;
+        for (int i = str.length - 1; i >= 0; i--) {
+            while (matched > 0 && str[matched] != str[i])
+                matched = helper[matched];
+
+            if (str[matched] == str[i])
+                matched++;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = str.length - 1; i >= matched; i--)
+            sb.append(str[i]);
+        sb.append(s);
+
+        return sb.toString();
+    }
+
+    private void prefixComp(int[] helper, char[] str) {
+        int len = helper.length;
+
+        helper[1] = 0;
+        int matched = 0;
+        for (int i = 2; i < len; i++) {
+            while (matched > 0 && str[matched] != str[i - 1])
+                matched = helper[matched];
+
+            if (str[matched] == str[i - 1])
+                matched++;
+
+            helper[i] = matched;
+        }
+
+        return;
+    }
 
     /**
      * Naive;

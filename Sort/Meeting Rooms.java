@@ -88,4 +88,32 @@ public class Solution {
      * 253. Meeting Rooms II
      * Skyline way.
      */
+     public int minMeetingRooms(Interval[] intervals) {
+
+        Integer[] points = new Integer[intervals.length * 2];
+        int idx = 0;
+        for (Interval i : intervals) {
+            points[idx++] = i.start;
+            points[idx++] = -i.end;
+        }
+
+        Arrays.sort(points, new Comparator<Integer>() {
+            public int compare(Integer i1, Integer i2) {
+
+                return (Math.abs(i1) == Math.abs(i2)) ? i1 - i2 : Math.abs(i1) - Math.abs(i2);
+            }
+        });
+
+        int max = 0, count = 0;
+
+        for (Integer i : points) {
+            if (i >= 0)
+                count++;
+            else
+                count--;
+            max = Math.max(max, count);
+        }
+
+        return max;
+    }
 }

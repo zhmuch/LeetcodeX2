@@ -51,4 +51,41 @@ public class Solution {
         }
         return true;
     }
+    
+    /**
+     * 253. Meeting Rooms II
+     * Greedy.
+     */
+    public int minMeetingRooms(Interval[] intervals) {
+
+        Arrays.sort(intervals, new Comparator<Interval>() {
+            public int compare(Interval i1, Interval i2) {
+                return i1.start - i2.start;
+            }
+        });
+
+        boolean[] used = new boolean[intervals.length];
+        
+        int count = 0, left = intervals.length;
+        while(left > 0) {
+            ++count;
+            int availableTime = 0;
+            for (int i = 0; i < intervals.length; i++) {
+                if (!used[i]) {
+                    if (intervals[i].start >= availableTime) {
+                        used[i] = true;
+                        --left;
+                        availableTime = intervals[i].end;
+                    }
+                }
+            }
+        }
+        
+        return count;
+    }
+    
+    /**
+     * 253. Meeting Rooms II
+     * Skyline way.
+     */
 }

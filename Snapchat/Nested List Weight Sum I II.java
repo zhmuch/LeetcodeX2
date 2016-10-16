@@ -90,3 +90,44 @@ public class Solution {
         return res;
     }
 }
+
+/**
+ * 364. Nested List Weight Sum II
+ * AC
+ */
+public class Solution {
+    public int depthSumInverse(List<NestedInteger> nestedList) {
+        return depthSumInverse(nestedList, getDepth(nestedList));
+    }
+    
+    private int depthSumInverse(List<NestedInteger> nestedList, int depth) {
+        if (nestedList == null || nestedList.size() < 1 || depth < 1)
+            return 0;
+        
+        int sum = 0;
+        
+        for (NestedInteger i : nestedList) {
+            sum += (i.isInteger()) ? i.getInteger() * depth : depthSumInverse(i.getList(), depth - 1);
+        }
+        
+        return sum;
+    }
+    
+    private int getDepth(List<NestedInteger> nestedList) {
+        if (nestedList == null || nestedList.size() < 1)
+            return 0;
+        
+        int depth = 0;
+        for (NestedInteger i : nestedList) {
+            if (!i.isInteger()) {
+                int tDepth = getDepth(i.getList());
+                int tmp = (tDepth == 0) ? 0 : tDepth + 1;
+                depth = Math.max(depth, tmp);
+            } else {
+                depth = Math.max(depth, 1);
+            }
+        }
+        
+        return depth;
+    }
+}

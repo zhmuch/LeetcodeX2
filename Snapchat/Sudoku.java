@@ -1,4 +1,7 @@
 public class Solution {
+    /**
+     * 36. Valid Sudoku
+     */
     public boolean isValidSudoku(char[][] board) {
         if (board == null || board.length != 9 || board[0].length != 9)
             return false;

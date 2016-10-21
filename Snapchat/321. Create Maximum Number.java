@@ -7,13 +7,7 @@ public class Solution {
         int[] res = new int[k]; 
         
         for (int i = Math.max(0, k - l2); i <= Math.min(l1, k); i++) {
-            int[] pos1 = generateK(nums1, i);
-            int[] pos2 = generateK(nums2, k - i);
-            
-            
-            int[] pos = merge(pos1, pos2);
-            
-            res = greaterNums(res, pos);
+            res = greaterNums(res, merge(generateK(nums1, i), generateK(nums2, k - i)));
         }
         
         return res;   
@@ -92,7 +86,6 @@ public class Solution {
                     else
                         res[idx++] = tmp1[pos1++];
             }
-            // System.out.println("res: " + res[idx - 1]);
         }
 
         if(pos1 == tmp1.length)
@@ -110,8 +103,6 @@ public class Solution {
      * Return the bigger one of two nums.
      */
     private int[] greaterNums(int[] nums1, int[] nums2) {
-        // System.out.println(nums1.length + " " + nums2.length);
-        
         int idx = 0;
         
         while(idx < nums1.length && nums1[idx] == nums2[idx]) {

@@ -33,4 +33,37 @@ public class Solution {
         
         return res;
     }
+    
+    
+    /**
+     * Comparator #2
+     */
+    public List<Integer> lexicalOrder(int n) {
+        List<Integer> res = new LinkedList<>();
+
+        for (int i = 1; i <= n; i++)
+            res.add(i);
+
+        Collections.sort(res, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                int l1 = Integer.toString(o1).length();
+                int l2 = Integer.toString(o2).length();
+
+                while (l1 > l2) {
+                    o2 *= 10;
+                    l2++;
+                }
+
+                while (l2 > l1) {
+                    o1 *= 10;
+                    l1++;
+                }
+
+                return o1 - o2;
+            }
+        });
+
+        return res;
+    }
 }

@@ -1,4 +1,40 @@
 public class Solution {
+    
+    /**
+     * Generate 
+     */
+    public List<Integer> lexicalOrder(int n) {
+        List<Integer> res = new LinkedList<>();
+        int curr = 1;
+
+        for (int i = 0; i < n; i++) {
+            res.add(curr);
+
+            //  possible 1
+            if (curr * 10 <= n) {
+                curr *= 10;
+                continue;
+            }
+
+            //  possible 2
+            while (curr % 10 == 9)
+                curr /= 10;
+
+            if (curr + 1 > n)
+                curr /= 10;
+            else {
+                curr++;
+                continue;
+            }
+
+            while (curr % 10 == 9)
+                curr /= 10;
+            
+            curr++;
+        }
+
+        return res;
+    }
 
     /**
      * Comparator #1
